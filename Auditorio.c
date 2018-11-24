@@ -19,7 +19,7 @@ void criarMatriz();
 void Plateia()
 {
 
-    int filas, colunas;
+    int filas, colunas, opc;
 
     tamanhoDaMatriz(&filas, &colunas);
     criarMatriz(filas, colunas);
@@ -35,19 +35,72 @@ void Plateia()
         Não,    Salva a matriz
     */ 
 
-    printf("Matriz esta correta ?");
+    do
+    {
 
-    /*
-        Opc de pergunta
-    */
+        printf("\n\nMatriz esta correta ? ");
+        
+        fflush(stdin);
+        opc = getchar();
 
-    printf("deseja adicionar corredores ?");
+        switch(opc)
+        {
 
-    /*
-        Opc de pergunta
-            Sim,    Chama edição
-            Não,    Salvar
-    */
+            /*
+                Inicio do case SIM
+            */
+
+            case 's':
+            case 'S':
+                
+                printf("deseja adicionar corredores ?");
+
+                opc = getchar();
+
+                    /*
+                        Inicio do case CORREDORES
+                    */
+                    
+                    switch(opc)
+                    {
+                        case 's':
+                        case 'S':
+                            /*  Chama a função de editar a matriz   */      printf(" FUNÇÃO EDIÇÃO ");
+                            break;
+
+                        case 'n':
+                        case 'N':
+                            /*  Chama a função de gravar os dados   */      printf(" GRAVAR DADOS ");
+                            break;
+
+                        default:
+                            printf("Opcão invalida!");
+                            break;
+                    }
+
+                    /*
+                        Fim do case CORREDORES
+                    */
+
+            return;
+
+            /*
+                Fim do case SIM
+            */
+
+            case 'n':
+            case 'N':
+                /*  Chama a função de gravar os dados   */      printf(" GRAVAR DADOS ");
+                break;
+
+            default:
+                printf("Opcão invalida!");
+                break;
+        }
+
+
+    }
+    while(1);
 
 }
 
@@ -83,22 +136,23 @@ void tamanhoDaMatriz(int *fil, int *col)
 
         char opc;
         opc = getchar();
+        fflush(stdin);
 
         switch(opc)
         {
             case 's':
-                return;
             case 'S':
                 return;
+
             case 'n':
-                break;
             case 'N':
                 break;
-            default:
-                printf("Opcão invalida!");
-            break;
-        }
 
+            default:
+
+                printf("Opcão invalida!");
+                break;
+        }
 
     }
     while(1);
