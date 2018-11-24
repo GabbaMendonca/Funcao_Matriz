@@ -2,14 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 /*
     PROTOTIPOS
 */
 
 
-void menu();
-void matriz();
+void tamanhoDaMatriz();
+void criarMatriz();
 
 
 /*
@@ -19,10 +18,37 @@ void matriz();
 
 void Plateia()
 {
+
     int filas, colunas;
 
-    menu(&filas, &colunas);
-    matriz(filas, colunas);
+    tamanhoDaMatriz(&filas, &colunas);
+    criarMatriz(filas, colunas);
+
+
+    /*
+        Peguntar se a matriz esta correta
+
+        Sim,    Pergunta se deseja adicionar corredores ?
+                    Sim, Iniciar a edição dos cotredores
+                    Não, Salva a matriz
+        
+        Não,    Salva a matriz
+    */ 
+
+    printf("Matriz esta correta ?");
+
+    /*
+        Opc de pergunta
+    */
+
+    printf("deseja adicionar corredores ?");
+
+    /*
+        Opc de pergunta
+            Sim,    Chama edição
+            Não,    Salvar
+    */
+
 }
 
 
@@ -31,8 +57,9 @@ void Plateia()
 */
 
 
-void menu(int *fil, int *col)
+void tamanhoDaMatriz(int *fil, int *col)
 {
+
     /* MENU DA MATRIZ
     Menu inicial para configurar a plateia
     
@@ -81,14 +108,14 @@ void menu(int *fil, int *col)
 
 
 
-void matriz(int filas, int colunas)
+void criarMatriz(int filas, int colunas)
 {
 
 
     /* INICIA A MANIPULAÇÃO DA MATRIZ
     Instancia a matriz na memoria para iniciar sua criação
 
-    Aqui inda estamos editando a mesma e esta pode ser alterada
+    Aqui ainda estamos editando a mesma e esta pode ser alterada
     Somente mostrara na tela a principio
     
     */
