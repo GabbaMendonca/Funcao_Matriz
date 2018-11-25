@@ -19,12 +19,64 @@ void criarMatriz();
 void Plateia()
 {
 
-    int filas, colunas;
-    char opc;
+    int filas, colunas, opcao;
 
     tamanhoDaMatriz(&filas, &colunas);
     criarMatriz(filas, colunas);
 
+    /*
+        Perguntar se quer salvar os dados ?
+        Perguntar se quer editar o projeto atual ?
+
+        Perguntar se quer add corredores verticais ?
+        Perguntar se quer add corredores horizontais ?
+
+        Se deseja abandonar o projeto ?
+    */
+
+    printf("\n\n    (1) >>> Salvar o projeto ?");
+    printf(  "\n    (2) >>> Redimencionar o projeto atual ?");
+
+    printf("\n\n    (3) >>> Adicionar corredor vertical ?");
+    printf(  "\n    (4) >>> Adicionar corredor horizontal ?");
+
+    printf("\n\n    (5) >>> Abandinar o projeto ?");
+
+    do
+    {
+        printf("\n\n    Digite a opcao : ");
+        scanf("%d%*c", &opcao);
+        fflush(stdin);
+
+        
+        switch (opcao)
+        {
+            case 1:
+                printf("SALVA OS DADOS ATUAIS");
+                break;
+
+            case 2:
+                printf("EDITA O PRJETO");
+                break;
+
+            case 3:
+                printf("VERTICAL");
+                break;
+        
+            case 4:
+                printf("HORIZONTAL");
+                break;
+
+            case 5:
+                printf("SAIR");
+                break;
+
+            default:
+                printf("Valor invalido \n");
+                break;
+        }
+
+    } while (1);
 }
 
 
@@ -84,7 +136,7 @@ void tamanhoDaMatriz(int *fil, int *col)
 
 
 
-void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?
+void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?, Edição/Gravação
 {
 
     /* 
@@ -195,83 +247,7 @@ void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?
 
 
 
-    /*
-        Peguntar se a matriz esta correta ? (Case MATRIZ)
-        Sim,    Pergunta se deseja adicionar corredores ? (Case CORREDORES)
-                Sim,    Iniciar a edição dos corredores 
-                Não,    Salva a matriz
-        
-        Não,    Retorna ao inicio
-    */ 
-
-    do
-    {
-
-        printf("\nMatriz esta correta ? ");
-        
-        scanf("%s%*c", &opc);
-        
-
-        switch(opc)
-        {
-
-            /*
-                Inicio do case MATRIZ
-            */
-
-            case 's':
-            case 'S':
-                
-                printf("\n\nDeseja adicionar corredores ? ");
-
-                scanf("%s%*c", &opc);
-                fflush(stdin);
-
-                    /*
-                        Inicio do case CORREDORES
-                    */
-                    
-                    switch(opc)
-                    {
-                        case 's':
-                        case 'S':
-                            /*  Chama a função de editar a matriz   */      printf(" FUNÇÃO EDIÇÃO ");
-                            break;
-
-                        case 'n':
-                        case 'N':
-                            /*  Chama a função de gravar os dados   */      printf(" GRAVAR DADOS ");
-                            return;
-
-                        default:
-                            printf("Opcão invalida!");
-                            break;
-                    }
-
-                    /*
-                        Fim do case CORREDORES
-                    */
-
-            return;
-
-            /*
-                Fim do case MATRIZ
-            */
-
-            case 'n':
-            case 'N':
-                Plateia();      /*  Volta ao inicio para inserir novamente a matriz   */
-                break;
-
-            default:
-                printf("Opcão invalida!");
-                break;
-        }
-
-
-    }
-    while(1);
-
+    
 }
 
 
