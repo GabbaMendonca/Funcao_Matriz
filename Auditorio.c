@@ -19,88 +19,11 @@ void criarMatriz();
 void Plateia()
 {
 
-    int filas, colunas, opc;
+    int filas, colunas;
+    char opc;
 
     tamanhoDaMatriz(&filas, &colunas);
     criarMatriz(filas, colunas);
-
-
-    /*
-        Peguntar se a matriz esta correta
-
-        Sim,    Pergunta se deseja adicionar corredores ?
-                    Sim, Iniciar a edição dos cotredores
-                    Não, Salva a matriz
-        
-        Não,    Salva a matriz
-    */ 
-
-    do
-    {
-
-        printf("\n\nMatriz esta correta ? ");
-        
-        fflush(stdin);
-        opc = getchar();
-
-        switch(opc)
-        {
-
-            /*
-                Inicio do case SIM
-            */
-
-            case 's':
-            case 'S':
-                
-                printf("deseja adicionar corredores ?");
-
-                opc = getchar();
-
-                    /*
-                        Inicio do case CORREDORES
-                    */
-                    
-                    switch(opc)
-                    {
-                        case 's':
-                        case 'S':
-                            /*  Chama a função de editar a matriz   */      printf(" FUNÇÃO EDIÇÃO ");
-                            break;
-
-                        case 'n':
-                        case 'N':
-                            /*  Chama a função de gravar os dados   */      printf(" GRAVAR DADOS ");
-                            break;
-
-                        default:
-                            printf("Opcão invalida!");
-                            break;
-                    }
-
-                    /*
-                        Fim do case CORREDORES
-                    */
-
-            return;
-
-            /*
-                Fim do case SIM
-            */
-
-            case 'n':
-            case 'N':
-                /*  Chama a função de gravar os dados   */      printf(" GRAVAR DADOS ");
-                break;
-
-            default:
-                printf("Opcão invalida!");
-                break;
-        }
-
-
-    }
-    while(1);
 
 }
 
@@ -113,11 +36,10 @@ void Plateia()
 void tamanhoDaMatriz(int *fil, int *col)
 {
 
-    /* MENU DA MATRIZ
-    Menu inicial para configurar a plateia
-    
-
-    /* Mostra na tela o menu de configurações  */
+    /* 
+        MENU DA MATRIZ
+        Menu inicial para configurar a plateia
+    */
 
     
     do
@@ -162,35 +84,34 @@ void tamanhoDaMatriz(int *fil, int *col)
 
 
 
-void criarMatriz(int filas, int colunas)
+void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?
 {
 
+    /* 
+        INICIA A MANIPULAÇÃO DA MATRIZ
+        Instancia a matriz na memoria para iniciar sua criação
 
-    /* INICIA A MANIPULAÇÃO DA MATRIZ
-    Instancia a matriz na memoria para iniciar sua criação
-
-    Aqui ainda estamos editando a mesma e esta pode ser alterada
-    Somente mostrara na tela a principio
-    
+        Aqui ainda estamos editando a mesma e esta pode ser alterada
+        Somente mostrara na tela a principio
     */
 
 
     filas++;
     colunas++;
 
-    // Criando a matriz
-    int plateia[filas][colunas];
-
-    // Carrega posição 0 0 da matriz com (-)
-    plateia[0][0] = 45;
-
+    char opc;
     int i,j;
 
+    int plateia[filas][colunas];
 
-    /* A coluna 0 serve para identificar as filas por letra,
-    sera carregado o valor de 65 a 90 equivalente A ate Z maiusculas
-    na tabela ASCII.
-    
+
+
+    plateia[0][0] = 45;             // Carrega posição 0 0 da matriz com (-)
+
+    /* 
+        A coluna 0 serve para identificar as filas por letra,
+        sera carregado o valor de 65 a 90 equivalente A ate Z maiusculas
+        na tabela ASCII.
     */
 
     for ( i = 1 ; i < filas; i++ )
@@ -200,8 +121,9 @@ void criarMatriz(int filas, int colunas)
 
 
 
-    /* Carrega a fila 0 com os numeros dos lugares 1,2,3,4 ...    */
-
+    /*
+        Carrega a fila 0 com os numeros dos lugares 1,2,3,4 ...
+    */
     for ( j = 1; j < colunas; j++ )
     {
         plateia[0][j] = j;
@@ -209,8 +131,9 @@ void criarMatriz(int filas, int colunas)
 
 
 
-    /* Carrega todo o resto da matriz com hufen (-) a partir da posição [1][1]  */ 
-
+    /*
+        Carrega todo o resto da matriz com hufen (-) a partir da posição [1][1] 
+    */ 
     for ( i = 1 ; i < filas; i++ )
     {   
         for ( j = 1; j < colunas; j++ )
@@ -221,43 +144,142 @@ void criarMatriz(int filas, int colunas)
 
 
 
-    /* MOSTRA A TELA A MATRIZ
-    A partir daqui começa a mostrar na tela a matriz criada
-    depois o intuito eseparar essa parte em uma funçao que so mostrar
-    a matriz    */
+    /* 
+        MOSTRA NA TELA A MATRIZ
+        A partir daqui começa a mostrar na tela a matriz criada
+        depois o intuito e separar essa parte em uma funçao que so mostra
+        a matriz
+    */
 
 
-    /* Preenche o espaço 0 0 com dois pontos */
+    /*  
+        Preenche o espaço 0 0 com dois pontos
+    */
     printf("%c%c%c%c%c%c%c%c%c%c", 58, 58, 58, 58, 58, 58, 58, 58, 58, 58);
 
 
-    /* Carrega na tela a  fila 0 onde mostra as o numero das filas */
+    /*
+        Carrega na tela a fila 0 onde mostra o numero das filas
+    */
     for ( j = 1; j < colunas; j++ )
     {   
         printf(" [ - %d - ] ", plateia[ 0 ][ j ]);
     }
 
 
-    /* Mostra a matriz na tela */
-    
-    // Laço responsavel por iniciar as fila da matriz
+    /* 
+        Mostra a matriz na tela
+    */
+
+    /*
+        Laço responsavel por mostrar as fila da matriz
+    */
     for ( i = 1 ; i < filas ; i++ )
     {
 
-
-        // mostar a coluna 0 apresentando as letras respectivas
+        /*
+            Mostar a coluna 0 apresentando as letras respectivas
+        */
         printf("\n Fila %c | ", plateia[ i ][ 0 ]); 
+        
 
-        // Laço responsavel por mostrar as colunas da matriz
+        /*
+            Laço responsavel por mostrar as colunas da matriz
+        */
         for ( j = 1; j < colunas; j++ ) 
         {   
-            //printf(" [ %d (%c) ] ",j, plateia[ i ][ j ]);
             printf(" [  (%c)  ] ", plateia[ i ][ j ]);
+        }
+
+    }
+
+
+
+    /*
+        Peguntar se a matriz esta correta ? (Case MATRIZ)
+        Sim,    Pergunta se deseja adicionar corredores ? (Case CORREDORES)
+                Sim,    Iniciar a edição dos corredores 
+                Não,    Salva a matriz
+        
+        Não,    Retorna ao inicio
+    */ 
+
+    do
+    {
+
+        printf("\nMatriz esta correta ? ");
+        
+        scanf("%s%*c", &opc);
+        
+
+        switch(opc)
+        {
+
+            /*
+                Inicio do case MATRIZ
+            */
+
+            case 's':
+            case 'S':
+                
+                printf("\n\nDeseja adicionar corredores ? ");
+
+                scanf("%s%*c", &opc);
+                fflush(stdin);
+
+                    /*
+                        Inicio do case CORREDORES
+                    */
+                    
+                    switch(opc)
+                    {
+                        case 's':
+                        case 'S':
+                            /*  Chama a função de editar a matriz   */      printf(" FUNÇÃO EDIÇÃO ");
+                            break;
+
+                        case 'n':
+                        case 'N':
+                            /*  Chama a função de gravar os dados   */      printf(" GRAVAR DADOS ");
+                            return;
+
+                        default:
+                            printf("Opcão invalida!");
+                            break;
+                    }
+
+                    /*
+                        Fim do case CORREDORES
+                    */
+
+            return;
+
+            /*
+                Fim do case MATRIZ
+            */
+
+            case 'n':
+            case 'N':
+                Plateia();      /*  Volta ao inicio para inserir novamente a matriz   */
+                break;
+
+            default:
+                printf("Opcão invalida!");
+                break;
         }
 
 
     }
+    while(1);
+
 }
+
+
+/*
+    Criar uma função que recebe como parametro a matriz para ser guardada e instacia um struct
+*/
+
+
 
 int main()
 {
