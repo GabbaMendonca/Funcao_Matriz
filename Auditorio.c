@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "_Terminal.h"
+
+#define CRIAR_MATRIZ criarMatriz ( filas, colunas, &cVertical, numCorredorVer, &cHorizontal, numCorredorHor );
+
 /*
     PROTOTIPOS
 */
@@ -9,6 +13,7 @@
 
 void tamanhoDaMatriz();
 void criarMatriz();
+void inseriCorredor();
 
 
 /*
@@ -19,10 +24,21 @@ void criarMatriz();
 void Plateia()
 {
 
-    int filas, colunas, opcao;
+    int opcao,
+        filas          , colunas,
+        cVertical  [10], numCorredorVer,
+        cHorizontal[10], numCorredorHor;
+        
+        
+        filas          = 0;
+        colunas        = 0;
+        opcao          = 0;
+        numCorredorVer = 0;
+        numCorredorHor = 0;
 
-    tamanhoDaMatriz(&filas, &colunas);
-    criarMatriz(filas, colunas);
+
+    tamanhoDaMatriz (&filas, &colunas);
+    CRIAR_MATRIZ
 
     /*
         Perguntar se quer salvar os dados ?
@@ -32,6 +48,8 @@ void Plateia()
         Perguntar se quer add corredores horizontais ?
 
         Se deseja abandonar o projeto ?
+
+        EXCLUIR UM CORREDOR
     */
 
     printf("\n\n    (1) >>> Salvar o projeto ?");
@@ -56,27 +74,39 @@ void Plateia()
                 break;
 
             case 2:
-                printf("EDITA O PRJETO");
+                Plateia();
                 break;
 
             case 3:
-                printf("VERTICAL");
+            
+                CRIAR_MATRIZ
+                inseriCorredor (&cVertical, &numCorredorVer);
+
+                colunas = colunas + numCorredorVer;
+                CRIAR_MATRIZ
                 break;
         
             case 4:
-                printf("HORIZONTAL");
+
+                CRIAR_MATRIZ
+                inseriCorredor (&cHorizontal, &numCorredorHor);
+
+                filas = filas + numCorredorHor;
+                CRIAR_MATRIZ
                 break;
 
             case 5:
-                printf("SAIR");
+                printf("SAIR - VAI CHAMAR O MENU DE ADM");
                 break;
 
             default:
                 printf("Valor invalido \n");
+                opcao = 0;
                 break;
         }
 
-    } while (1);
+    } while (opcao = 0);
+
 }
 
 
@@ -136,7 +166,9 @@ void tamanhoDaMatriz(int *fil, int *col)
 
 
 
-void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?, Edição/Gravação
+void criarMatriz(   int filas       , int colunas,
+                    int *cVertical  , int numCorredorVer,
+                    int *cHorizontal, int numCorredorHor    ) // Onde esta os corredores ?, Edição/Gravação
 {
 
     /* 
@@ -150,6 +182,7 @@ void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?, Ediç�
 
     filas++;
     colunas++;
+    numCorredorHor = numCorredorHor + 64;
 
     char opc;
     int i,j;
@@ -189,8 +222,46 @@ void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?, Ediç�
     for ( i = 1 ; i < filas; i++ )
     {   
         for ( j = 1; j < colunas; j++ )
-        {
-            plateia[i][j] = 45;
+        {   
+            if (numCorredorVer != 0)
+            {
+                for ( int k = 0; k < numCorredorVer; k++)
+                {
+                    if (cVertical[k] == j)
+                    {
+                        plateia[i][j] = 67; // corredor
+                        break;
+                    }
+                    else
+                    {
+                        plateia[i][j] = 45; // lugar vazio
+                    }
+                }
+            }
+            else
+            {
+                plateia[i][j] = 45; // lugar vazio
+            }
+
+            if (numCorredorHor =! 0)
+            {
+                for ( int l = 1; l < numCorredorHor; l++)
+                {
+                    if (cHorizontal[l] == i)
+                    {
+                        plateia[i][j] = 67; // corredor
+                        break;
+                    }
+                    else
+                    {
+                        plateia[i][j] = 45; // lugar vazio
+                    }
+                }
+            }
+            else
+            {
+                plateia[i][j] = 45; // lugar vazio
+            }    
         }
     }
 
@@ -203,7 +274,8 @@ void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?, Ediç�
         a matriz
     */
 
-
+    LIMPA_TERM
+    
     /*  
         Preenche o espaço 0 0 com dois pontos
     */
@@ -245,15 +317,24 @@ void criarMatriz(int filas, int colunas)    // Onde esta os corredores ?, Ediç�
 
     }
 
-
-
-    
 }
 
 
-/*
-    Criar uma função que recebe como parametro a matriz para ser guardada e instacia um struct
-*/
+void inseriCorredor(int *vetorCorredor, int *numCorredores)
+{
+
+    int i;
+
+    printf("\nQuantos corredores deseja inserir ? ");
+    scanf("%d%*c", &*numCorredores);
+
+    for ( i = 0; i < *numCorredores; i++ )
+    {
+        printf("Digite a fila do %d corredor : ", i+1);
+        scanf("%d%*c", &vetorCorredor[i]);
+    }
+
+}
 
 
 
