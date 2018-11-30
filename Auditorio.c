@@ -49,19 +49,24 @@ void Plateia()
 
         Se deseja abandonar o projeto ?
 
-        EXCLUIR UM CORREDOR
+        EXCLUIR UM CORREDOR'
     */
-
-    printf("\n\n    (1) >>> Salvar o projeto ?");
-    printf(  "\n    (2) >>> Redimencionar o projeto atual ?");
-
-    printf("\n\n    (3) >>> Adicionar corredor vertical ?");
-    printf(  "\n    (4) >>> Adicionar corredor horizontal ?");
-
-    printf("\n\n    (5) >>> Abandinar o projeto ?");
 
     do
     {
+        // LIMPA_TERM
+        // CRIAR_MATRIZ
+
+        printf("\n\n    (1) >>> Salvar o projeto ?");
+        printf(  "\n    (2) >>> Redimencionar o projeto atual ?");
+
+        printf("\n\n    (3) >>> Adicionar corredor vertical ?");
+        printf(  "\n    (4) >>> Adicionar corredor horizontal ?");
+
+        printf("\n\n    (5) >>> Abandinar o projeto ?");
+
+    
+    
         printf("\n\n    Digite a opcao : ");
         scanf("%d%*c", &opcao);
         fflush(stdin);
@@ -101,11 +106,11 @@ void Plateia()
 
             default:
                 printf("Valor invalido \n");
-                opcao = 0;
+                //opcao = 0;
                 break;
         }
 
-    } while (opcao = 0);
+    } while (1); //while (opcao = 0);
 
 }
 
@@ -222,49 +227,37 @@ void criarMatriz(   int filas       , int colunas,
     {   
         for ( j = 1; j < colunas; j++ )
         {   
-            if (numCorredorVer != 0)
+            if (numCorredorVer != 0 || numCorredorHor !=0 )
             {
+                
                 for ( int k = 0; k < numCorredorVer; k++)
                 {
                     if (cVertical[k] == j)
                     {
-                        plateia[i][j] = 67; // corredor
-                        break;
-                    }
-                    else
-                    {
-                        plateia[i][j] = 45; // lugar vazio
+                        plateia[i][j] = 64; // corredor
+                        goto FIM;
                     }
                 }
-            }
-            else
-            {
-                plateia[i][j] = 45; // lugar vazio
-            }
-
-            if (numCorredorHor != 0)
-            {
                 for ( int l = 0; l < numCorredorHor; l++)
                 {
                     if (cHorizontal[l] == i)
                     {
-                        plateia[i][j] = 67; // corredor
-                        break;
-                    }
-                    
-                    else
-                    {
-                        plateia[i][j] = 45; // lugar vazio
+                        plateia[i][j] = ; // corredor
+                        goto FIM;
                     }
                 }
+
+                plateia[i][j] = 32; // lugar vazio
             }
             else
             {
-                plateia[i][j] = 45; // lugar vazio
-            }    
+                plateia[i][j] = 32; // lugar vazio
+            }
+            
+            FIM:
+            continue;
         }
     }
-
 
 
     /* 
