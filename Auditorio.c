@@ -182,7 +182,6 @@ void criarMatriz(   int filas       , int colunas,
 
     filas++;
     colunas++;
-    numCorredorHor = numCorredorHor + 64;
 
     char opc;
     int i,j;
@@ -243,15 +242,16 @@ void criarMatriz(   int filas       , int colunas,
                 plateia[i][j] = 45; // lugar vazio
             }
 
-            if (numCorredorHor =! 0)
+            if (numCorredorHor != 0)
             {
-                for ( int l = 1; l < numCorredorHor; l++)
+                for ( int l = 0; l < numCorredorHor; l++)
                 {
                     if (cHorizontal[l] == i)
                     {
                         plateia[i][j] = 67; // corredor
                         break;
                     }
+                    
                     else
                     {
                         plateia[i][j] = 45; // lugar vazio
