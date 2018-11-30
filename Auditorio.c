@@ -242,7 +242,7 @@ void criarMatriz(   int filas       , int colunas,
                 {
                     if (cHorizontal[l] == i)
                     {
-                        plateia[i][j] = ; // corredor
+                        plateia[i][j] = 45; // corredor
                         goto FIM;
                     }
                 }
